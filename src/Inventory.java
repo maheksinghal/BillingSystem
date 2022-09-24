@@ -64,5 +64,23 @@ public class Inventory {
             }
         }
     }
+    Product getDetails(int productId,int qty){
+        for(int i=0;i<obj1.length;i++){
+            if(productId==obj1[i].getProductId()){
+                if(qty<=obj1[i].getQty()) {
+                    saleTracker(qty, i);
+                    return obj1[i];
+                }
+                else{
+                    System.out.println("Insufficient quantity");
+                }
+            }
+        }
+        return null;
+    }
+    void saleTracker(int quantity,int index){
+        int finalQty=obj1[index].getQty()-quantity;
+        obj1[index].setQty(finalQty);
+    }
 }
 
