@@ -9,6 +9,7 @@ public class Inventory {
             new Product(4,"Glucose",10,55),
             new Product(5,"Tang",7,15)
     };
+
     void addProd(){
         Product object=new Product();
         System.out.println("Enter product id");
@@ -71,8 +72,22 @@ public class Inventory {
                     saleTracker(qty, i);
                     return obj1[i];
                 }
+                else if(qty>obj1[i].getQty() && qty>0){
+                    while(true) {
+                        System.out.println("Insufficient quantity,only " + obj1[i].getQty() + "left!");
+                        System.out.println("Enter new quantity");
+                        int newQty = input.nextInt();
+                        Bill.setQty(newQty);
+                        if (newQty>0 && newQty <= obj1[i].getQty()) {
+                            saleTracker(newQty, i);
+                            return obj1[i];
+                        } else if (newQty == 0) {
+                            return null;
+                        }
+                    }
+                }
                 else{
-                    System.out.println("Insufficient quantity");
+                    System.out.println("No quantity in stock");
                 }
             }
         }

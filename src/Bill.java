@@ -6,12 +6,17 @@ public class Bill {
     private String address;
     private int billNo;
     Inventory objects=new Inventory();
+    private static int qty;
+    public static void setQty(int qty) {
+        Bill.qty = qty;
+    }
+
     void newBill(){
         Scanner input=new Scanner(System.in);
+        System.out.println("Enter name of customer");
+        name=input.nextLine();
         System.out.println("Enter address of customer");
         address= input.nextLine();
-        System.out.println("Enter name of customer");
-        name=input.next();
         System.out.println("Enter phone number of customer");
         phoneNo= input.nextLong();
         billNo= 100;
@@ -21,7 +26,6 @@ public class Bill {
         /*System.out.println("Enter choice");
         String choice=input.next();*/
         String pId;
-        int qty;
         boolean flag=true;
         //do{
             /*.out.println("Enter choice");
@@ -30,7 +34,7 @@ public class Bill {
             System.out.println("Enter product id for adding product and exit for exit");
             pId = input.next();
             boolean flag2 = true;
-            for (int i = 0; i < obj.length; i++) {
+            for (int i = 0; i < pId.length(); i++) {
                 if (!Character.isDigit(pId.charAt(i))) {
                     flag2 = false;
                 }
@@ -38,18 +42,19 @@ public class Bill {
             if (flag2) {
                 System.out.println("Enter quantity");
                 qty = input.nextInt();
-                int len = obj.length;
-                Product[] temp = new Product[len + 1];
-                int[] tempQty = new int[qtyObj.length + 1];
+                int len=obj.length;
+                Product[] temp=new Product[len+1];
+                int[] tempQty=new int[qtyObj.length + 1];
                 for (int i = 0; i < obj.length; i++) {
-                    temp[i] = obj[i];
-                    tempQty[i] = qtyObj[i];
+                            temp[i] = obj[i];
+                            tempQty[i] = qtyObj[i];
                 }
                 temp[len] = objects.getDetails(Integer.parseInt(pId),qty);
                 obj = temp;
                 tempQty[qtyObj.length] = qty;
                 qtyObj = tempQty;
-            } else {
+            }
+            else{
                 if(pId.equals("exit")||pId.equals("EXIT")||pId.equals("Exit")){
                     flag=false;
                 }
@@ -131,7 +136,7 @@ public class Bill {
         System.out.printf("%15s",total);
         System.out.println();
         System.out.println("---------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%15s %90s","Tax","|");
+        System.out.printf("%15s %90s","Tax(18%)","|");
         System.out.printf("%15s",tax);
         System.out.println();
         System.out.println("---------------------------------------------------------------------------------------------------------------------------");
